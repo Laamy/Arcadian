@@ -1,15 +1,11 @@
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 public class BlankForm : Form
 {
-    [DllImport("user32.dll")]
-    public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
-    [DllImport("user32.dll")]
-    public static extern bool ReleaseCapture();
-
     public BlankForm()
     {
         InitializeComponents();
@@ -18,6 +14,35 @@ public class BlankForm : Form
     public virtual void InitializeComponents() { }
 
     private const int CS_DROPSHADOW = 0x00020000;
+    private const int BORDER_RADIUS = 20;
+
+    private void UpdateRegion()
+    {
+        GraphicsPath path = new GraphicsPath();
+        path.StartFigure();
+        path.AddArc(new Rectangle(0, 0, BORDER_RADIUS, BORDER_RADIUS), 180, 90);
+        path.AddArc(new Rectangle(this.Width - BORDER_RADIUS, 0, BORDER_RADIUS, BORDER_RADIUS), 270, 90);
+        path.AddArc(new Rectangle(this.Width - BORDER_RADIUS, this.Height - BORDER_RADIUS, BORDER_RADIUS, BORDER_RADIUS), 0, 90);
+        path.AddArc(new Rectangle(0, this.Height - BORDER_RADIUS, BORDER_RADIUS, BORDER_RADIUS), 90, 90);
+        path.CloseFigure();
+
+        this.Region = new Region(path);
+    }
+
+    protected override void OnResize(EventArgs e)
+    {
+        base.OnResize(e);
+
+        UpdateRegion();
+        this.Invalidate();
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        base.OnPaint(e);
+
+        UpdateRegion();
+    }
 
     protected override CreateParams CreateParams
     {

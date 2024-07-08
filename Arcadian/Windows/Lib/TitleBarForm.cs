@@ -26,11 +26,35 @@ class TitleBarForm : BlankForm
         }
     }
 
+    bool IsResizing = false;
+    
+    //TODO: fix resize bug
+    protected override void OnResizeBegin(EventArgs e)
+    {
+        base.OnResizeBegin(e);
+
+        Console.WriteLine("Start");
+
+        IsResizing = true;
+        Opacity = 0.9;
+    }
+
+    protected override void OnResizeEnd(EventArgs e)
+    {
+        base.OnResizeEnd(e);
+
+        Console.WriteLine("End");
+
+        IsResizing = false;
+        Opacity = 1;
+    }
+
     public override void InitializeComponents()
     {
         FormBorderStyle = FormBorderStyle.None;
         StartPosition = FormStartPosition.CenterScreen;
         Size = new Size(800, 460);
+        DoubleBuffered = true;
 
         MinimumSize = new Size(600, 320);
         MaximumSize = new Size(800, 460);
@@ -47,14 +71,17 @@ class TitleBarForm : BlankForm
                 Dragging = true;
                 DragCursorPoint = Cursor.Position;
                 DragFormPoint = this.Location;
-                Opacity = 0.9;
+
+                if (!IsResizing)
+                    Opacity = 0.9;
             }
 
             void Titlebar_MouseUp(object sender, MouseEventArgs e)
             {
                 Dragging = false;
 
-                Opacity = 1;
+                if (!IsResizing)
+                    Opacity = 1;
             }
 
             void Titlebar_MouseMove(object sender, MouseEventArgs e)
