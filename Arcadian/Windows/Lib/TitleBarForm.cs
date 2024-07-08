@@ -22,7 +22,7 @@ class TitleBarForm : BlankForm
         {
             base.Text = value;
 
-            TitleBarText.Text = value;
+            TitleBarText.Text = " " + value;
         }
     }
 
@@ -33,8 +33,6 @@ class TitleBarForm : BlankForm
     {
         base.OnResizeBegin(e);
 
-        Console.WriteLine("Start");
-
         IsResizing = true;
         Opacity = 0.9;
     }
@@ -42,8 +40,6 @@ class TitleBarForm : BlankForm
     protected override void OnResizeEnd(EventArgs e)
     {
         base.OnResizeEnd(e);
-
-        Console.WriteLine("End");
 
         IsResizing = false;
         Opacity = 1;
@@ -112,7 +108,7 @@ class TitleBarForm : BlankForm
                     TextAlign = ContentAlignment.MiddleLeft,
                     Text = "TitleBarForm",
                     ForeColor = Color.White,
-                    Font = new Font("Arial", 12),
+                    Font = new Font(" Yu Gothic Light", 10),
                     Size = new Size(150, 0),
                 };
 
