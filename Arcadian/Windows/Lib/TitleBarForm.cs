@@ -5,6 +5,7 @@ using System.Windows.Forms;
 class TitleBarForm : BlankForm
 {
     Panel TitleBar;
+    DropShadowPanel TitleBarShadow; // seperate to avoid annoyances
     Label TitleBarText;
     Label TitleBarMinBtn;
     Label TitleBarCloseBtn;
@@ -96,6 +97,22 @@ class TitleBarForm : BlankForm
                 BackColor = StyleForm.Titlebar
             };
 
+            {
+                TitleBarShadow = new DropShadowPanel()
+                {
+                    Dock = DockStyle.Top,
+                    ShadowDepth = 10,
+                    Size = new Size(0, 10), // also shadow depth
+                    BackColor = StyleForm.Titlebar,
+                    ShadowColor = StyleForm.Background,
+                };
+
+                TitleBarShadow.MouseDown += Titlebar_MouseDown;
+                TitleBarShadow.MouseMove += Titlebar_MouseMove;
+                TitleBarShadow.MouseUp += Titlebar_MouseUp;
+                Controls.Add(TitleBarShadow);
+            }
+
             TitleBar.MouseDown += Titlebar_MouseDown;
             TitleBar.MouseMove += Titlebar_MouseMove;
             TitleBar.MouseUp += Titlebar_MouseUp;
@@ -108,7 +125,7 @@ class TitleBarForm : BlankForm
                     TextAlign = ContentAlignment.MiddleLeft,
                     Text = "TitleBarForm",
                     ForeColor = Color.White,
-                    Font = new Font(" Yu Gothic Light", 10),
+                    Font = new Font("Yu Gothic UI Light", 10),
                     Size = new Size(150, 0),
                 };
 
@@ -126,9 +143,9 @@ class TitleBarForm : BlankForm
                     Dock = DockStyle.Right,
                     TextAlign = ContentAlignment.MiddleCenter,
                     ForeColor = Color.Yellow,
-                    Font = new Font("Arial", 20),
+                    Font = new Font("Arial", 8),
                     Size = new Size(16, 0),
-                    Text = "•"
+                    Text = "⚫"
                 };
 
                 TitleBarMinBtn.Click += MinBtn_Click;
@@ -143,9 +160,9 @@ class TitleBarForm : BlankForm
                     Dock = DockStyle.Right,
                     TextAlign = ContentAlignment.MiddleCenter,
                     ForeColor = Color.Red,
-                    Font = new Font("Arial", 20),
+                    Font = new Font("Arial", 8),
                     Size = new Size(16, 0),
-                    Text = "•"
+                    Text = "⚫"
                 };
 
                 TitleBarCloseBtn.Click += CloseBtn_Click;
