@@ -42,18 +42,27 @@ class LauncherForm : TitleBarForm
         // the side panel
         this.clientspanel = new ScrollablePanel();
 
-        Label label1;
-        Panel SlotBackground;
-        PictureBox ClientImage;
-        Label label2;
-
         clientspanel.SuspendLayout();
         this.SuspendLayout();
 
+        this.clientspanel.AutoScroll = true;
+        this.clientspanel.BackColor = System.Drawing.Color.FromArgb(32, 32, 32);
+        this.clientspanel.Dock = System.Windows.Forms.DockStyle.Left;
+        this.clientspanel.Location = new System.Drawing.Point(0, 34);
+        this.clientspanel.Size = new System.Drawing.Size(181, 426);
+        this.clientspanel.TabIndex = 1;
+        this.clientspanel.RightShadow = new DropShadow() { ShadowDepth = 7 };
+
+        // winform designer generated code
         // setup panel
         foreach (var client in Clients)
         {
-            SlotBackground = new System.Windows.Forms.Panel();
+            Label label1;
+            ScrollablePanel SlotBackground;
+            PictureBox ClientImage;
+            Label label2;
+
+            SlotBackground = new ScrollablePanel();
             ClientImage = new System.Windows.Forms.PictureBox();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
@@ -61,13 +70,7 @@ class LauncherForm : TitleBarForm
             SlotBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(ClientImage)).BeginInit();
 
-            this.clientspanel.AutoScroll = true;
-            this.clientspanel.BackColor = System.Drawing.Color.FromArgb(32, 32, 32);
             this.clientspanel.Controls.Add(SlotBackground);
-            this.clientspanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.clientspanel.Location = new System.Drawing.Point(0, 34);
-            this.clientspanel.Size = new System.Drawing.Size(181, 426);
-            this.clientspanel.TabIndex = 1;
 
             SlotBackground.BackColor = System.Drawing.Color.FromArgb(32, 32, 32);
             SlotBackground.Controls.Add(ClientImage);
@@ -76,6 +79,8 @@ class LauncherForm : TitleBarForm
             SlotBackground.Dock = System.Windows.Forms.DockStyle.Top;
             SlotBackground.Location = new System.Drawing.Point(0, 0);
             SlotBackground.Size = new System.Drawing.Size(181, 56);
+
+            SlotBackground.RightShadow = new DropShadow() { ShadowDepth = 7 };
 
             // TODO: cache images/make texture repos class
             if (client.Image != null)

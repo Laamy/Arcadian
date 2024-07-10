@@ -108,10 +108,12 @@ class TitleBarForm : BlankForm
                 TitleBarShadow = new DropShadowPanel()
                 {
                     Dock = DockStyle.Top,
-                    ShadowDepth = 10,
                     Size = new Size(0, 10), // also shadow depth
                     BackColor = StyleForm.Titlebar,
-                    ShadowColor = StyleForm.Background,
+                    BottomShadow = new DropShadow()
+                    {
+                        ShadowDepth = 7
+                    }
                 };
 
                 TitleBarShadow.MouseDown += Titlebar_MouseDown;

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
-class ScrollablePanel : Panel
+class ScrollablePanel : DropShadowPanel
 {
     public ScrollablePanel()
     {

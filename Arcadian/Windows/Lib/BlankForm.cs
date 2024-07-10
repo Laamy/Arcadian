@@ -14,19 +14,23 @@ public class BlankForm : Form
     public virtual void InitializeComponents() { }
 
     private const int CS_DROPSHADOW = 0x00020000;
-    private const int BORDER_RADIUS = 7;
+    private const int BORDER_RADIUS = 20;
 
+    [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+    private static extern IntPtr CreateRoundRectRgn
+    (
+        int nLeftRect,     // x-coordinate of upper-left corner
+        int nTopRect,      // y-coordinate of upper-left corner
+        int nRightRect,    // x-coordinate of lower-right corner
+        int nBottomRect,   // y-coordinate of lower-right corner
+        int nWidthEllipse, // width of ellipse
+        int nHeightEllipse // height of ellipse
+    );
+
+    // https://stackoverflow.com/questions/18822067/rounded-corners-in-c-sharp-windows-forms
     private void UpdateRegion()
     {
-        GraphicsPath path = new GraphicsPath();
-        path.StartFigure();
-        path.AddArc(new Rectangle(0, 0, BORDER_RADIUS, BORDER_RADIUS), 180, 90);
-        path.AddArc(new Rectangle(this.Width - BORDER_RADIUS, 0, BORDER_RADIUS, BORDER_RADIUS), 270, 90);
-        path.AddArc(new Rectangle(this.Width - BORDER_RADIUS, this.Height - BORDER_RADIUS, BORDER_RADIUS, BORDER_RADIUS), 0, 90);
-        path.AddArc(new Rectangle(0, this.Height - BORDER_RADIUS, BORDER_RADIUS, BORDER_RADIUS), 90, 90);
-        path.CloseFigure();
-
-        this.Region = new Region(path);
+        Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, BORDER_RADIUS, BORDER_RADIUS));
     }
 
     protected override void OnResize(EventArgs e)
