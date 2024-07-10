@@ -19,6 +19,8 @@ class TitleBarForm : BlankForm
     {
         public static Color Background = Color.FromArgb(0xFF, 0x30, 0x30, 0x30);
         public static Color Titlebar = Color.FromArgb(0xFF, 0x20, 0x20, 0x20);
+        public static Color TitlebarClose = Color.FromArgb(0xFF, 0x91, 0x17, 0x1f);
+        public static Color TitlebarMinimize = Color.FromArgb(0xFF, 0xff, 0x95, 0x00);
     }
 
     public override string Text
@@ -146,12 +148,14 @@ class TitleBarForm : BlankForm
                 TitleBarMinBtn = new Label()
                 {
                     Dock = DockStyle.Right,
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    ForeColor = Color.Yellow,
+                    TextAlign = ContentAlignment.BottomCenter,
+                    ForeColor = StyleForm.TitlebarMinimize,
                     Font = new Font("Arial", 8),
-                    Size = new Size(16, 0),
-                    Text = "⚫"
+                    Size = new Size(24, 0),
+                    Text = "⚫" // "•"
                 };
+
+                TitleBarMinBtn.Padding = new Padding(7, 0, 0, 3);
 
                 TitleBarMinBtn.Click += MinBtn_Click;
                 TitleBar.Controls.Add(TitleBarMinBtn);
@@ -163,12 +167,14 @@ class TitleBarForm : BlankForm
                 TitleBarCloseBtn = new Label()
                 {
                     Dock = DockStyle.Right,
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    ForeColor = Color.Red,
+                    TextAlign = ContentAlignment.BottomCenter,
+                    ForeColor = StyleForm.TitlebarClose,
                     Font = new Font("Arial", 8),
-                    Size = new Size(16, 0),
-                    Text = "⚫"
+                    Size = new Size(24, 0),
+                    Text = "⚫" // "•"
                 };
+
+                TitleBarCloseBtn.Padding = new Padding(0, 0, 3, 3);
 
                 TitleBarCloseBtn.Click += CloseBtn_Click;
                 TitleBar.Controls.Add(TitleBarCloseBtn);

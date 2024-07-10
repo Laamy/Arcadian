@@ -1,13 +1,8 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Net;
 using System.Windows.Forms;
-
-class ClientBase
-{
-    public string Image;
-    public string Name;
-    public string Version;
-}
 
 class LauncherForm : TitleBarForm
 {
@@ -15,9 +10,10 @@ class LauncherForm : TitleBarForm
 
     public List<ClientBase> Clients = new List<ClientBase>()
     {
-        new ClientBase()
+        new ClientBase() // temp things
         {
             Name = "Trero Utility",
+            Image = "https://hd.wallpaperswide.com/thumbs/funny_cat_5-t2.jpg",
             Version = "v1.17.11"
         },
         new ClientBase()
@@ -81,7 +77,24 @@ class LauncherForm : TitleBarForm
             SlotBackground.Location = new System.Drawing.Point(0, 0);
             SlotBackground.Size = new System.Drawing.Size(181, 56);
 
-            ClientImage.Image = global::Arcadian.Properties.Resources.background;
+            // TODO: cache images/make texture repos class
+            if (client.Image != null)
+            {
+                using (WebClient wc = new WebClient())
+                {
+                    byte[] daImage = wc.DownloadData(client.Image);
+                    using (var ms = new MemoryStream(daImage))
+                    {
+                        ClientImage.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+            else
+            {
+                // texture not found
+                ClientImage.Image = global::Arcadian.Properties.Resources.background;
+            }
+
             ClientImage.Location = new System.Drawing.Point(8, 7);
             ClientImage.Size = new System.Drawing.Size(43, 43);
             ClientImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
