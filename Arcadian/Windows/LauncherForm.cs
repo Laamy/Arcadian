@@ -51,7 +51,7 @@ class LauncherForm : TitleBarForm
         this.clientspanel.Location = new System.Drawing.Point(0, 34);
         this.clientspanel.Size = new System.Drawing.Size(181, 426);
         this.clientspanel.TabIndex = 1;
-        this.clientspanel.RightShadow = new DropShadow() { ShadowDepth = 7 };
+        //this.clientspanel.RightShadow = new DropShadow() { ShadowDepth = 7 };
 
         // winform designer generated code
         // setup panel
@@ -80,7 +80,7 @@ class LauncherForm : TitleBarForm
             SlotBackground.Location = new System.Drawing.Point(0, 0);
             SlotBackground.Size = new System.Drawing.Size(181, 56);
 
-            SlotBackground.RightShadow = new DropShadow() { ShadowDepth = 7 };
+            //SlotBackground.RightShadow = new DropShadow() { ShadowDepth = 7 };
 
             // TODO: cache images/make texture repos class
             if (client.Image != null)
