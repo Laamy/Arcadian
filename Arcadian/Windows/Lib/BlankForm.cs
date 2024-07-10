@@ -14,7 +14,7 @@ public class BlankForm : Form
     public virtual void InitializeComponents() { }
 
     private const int CS_DROPSHADOW = 0x00020000;
-    private const int BORDER_RADIUS = 20;
+    private const int BORDER_RADIUS = 7;
 
     private void UpdateRegion()
     {

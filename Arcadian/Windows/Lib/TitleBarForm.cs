@@ -10,6 +10,11 @@ class TitleBarForm : BlankForm
     Label TitleBarMinBtn;
     Label TitleBarCloseBtn;
 
+    public void RefreshTaskbar()
+    {
+        TitleBarShadow.BringToFront();
+    }
+
     class StyleForm
     {
         public static Color Background = Color.FromArgb(0xFF, 0x30, 0x30, 0x30);
@@ -93,7 +98,7 @@ class TitleBarForm : BlankForm
             TitleBar = new Panel()
             {
                 Dock = DockStyle.Top,
-                Size = new Size(0, 28),
+                Size = new Size(0, 24),
                 BackColor = StyleForm.Titlebar
             };
 
